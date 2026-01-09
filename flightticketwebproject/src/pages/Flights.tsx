@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { searchFlights } from "../api/flights"
+import type { Flight } from "../types/flight"
 
 export default function Flights() {
     const [from, setFrom] = useState("TPE")
     const [to, setTo] = useState("OKA")
     const [depart, setDepart] = useState("2026-03-12")
     const [ret, setRet] = useState("2026-03-15")
-    const [result, setResult] = useState<any[]>([])
+    const [result, setResult] = useState<Flight[]>([])
     const [loading, setLoading] = useState(false)
 
     async function handleSearch() {
