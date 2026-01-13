@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { searchFlights } from "../api/flights"
+import { searchFlights} from "../api/flights"
 import type { Flight } from "../types/flight"
 
 export default function Flights() {
