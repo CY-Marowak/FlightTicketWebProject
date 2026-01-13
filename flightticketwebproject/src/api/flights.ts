@@ -1,6 +1,7 @@
 import api from "./client"
 import { getToken } from "../utils/token"
 import type { TrackedFlight } from "../types/flight"
+import type { FlightResult } from "../types/flight"
 
 
 /* ============================
@@ -19,7 +20,7 @@ export async function searchFlights(params: FlightQuery) {
 }
 
 /* ============================
-   追蹤航班（需要 JWT）
+   追蹤航班（JWT）
 ============================ */
 export async function fetchTrackedFlights(): Promise<TrackedFlight[]> {
     const token = getToken()
@@ -40,3 +41,11 @@ export async function fetchTrackedFlights(): Promise<TrackedFlight[]> {
     return res.data
 }
 
+/* ============================
+   加入航班(JWT)
+============================ */
+
+export async function addTrackedFlight(flight: FlightResult) {
+    const res = await api.post("/flights", flight)
+    return res.data
+}

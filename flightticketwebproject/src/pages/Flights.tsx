@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { searchFlights} from "../api/flights"
 import type { Flight } from "../types/flight"
+import { addTrackedFlight } from "../api/flights"
+import type { FlightResult } from "../types/flight"
 
 export default function Flights() {
     const [from, setFrom] = useState("TPE")
@@ -25,6 +27,16 @@ export default function Flights() {
         }
     }
 
+    async function handleAdd(flight: FlightResult){
+        try {
+            await addTrackedFlight(flight)
+            alert("已加入追蹤")
+        } catch (err) {
+            alert("加入追蹤失敗")
+        }
+    }
+
+
     return (
         <div>
             <h2>查詢航班</h2>
@@ -42,6 +54,9 @@ export default function Flights() {
                 {result.map((f, i) => (
                     <li key={i}>
                         {f.flight_number} - {f.price}
+                        <button onClick={() => handleAdd(f)}>
+                            加入追蹤
+                        </button>
                     </li>
                 ))}
             </ul>
