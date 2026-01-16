@@ -1,0 +1,61 @@
+/* ===== 共用表格樣式 ===== */
+
+.app-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+    .app-table th,
+    .app-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #444;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .app-table th {
+        background: linear-gradient(180deg, #3a3a3a, #2b2b2b);
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .app-table tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+/* 操作按鈕容器 */
+.app-table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* 通用按鈕 */
+.app-btn {
+    padding: 4px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 刪除 */
+.app-btn-danger {
+    background-color: #d9534f;
+    color: white;
+}
+
+    .app-btn-danger:hover {
+        background-color: #c9302c;
+    }
+
+/* 一般操作 */
+.app-btn-primary {
+    background-color: #0275d8;
+    color: white;
+}
+
+    .app-btn-primary:hover {
+        background-color: #025aa5;
+    }

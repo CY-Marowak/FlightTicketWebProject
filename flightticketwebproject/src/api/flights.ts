@@ -49,3 +49,12 @@ export async function addTrackedFlight(flight: FlightResult) {
     const res = await api.post("/flights", flight)
     return res.data
 }
+
+/* ============================
+   刪除航班(JWT)
+============================ */
+
+export async function deleteTrackedFlight(id: number) {
+    const res = await api.delete(`/flights/${id}`)
+    return res.data
+}

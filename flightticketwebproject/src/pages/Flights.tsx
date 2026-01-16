@@ -4,6 +4,10 @@ import type { Flight } from "../types/flight"
 import { addTrackedFlight } from "../api/flights"
 import type { FlightResult } from "../types/flight"
 
+/*
+    查詢航班頁面
+*/
+
 export default function Flights() {
     const [from, setFrom] = useState("TPE")
     const [to, setTo] = useState("OKA")
@@ -40,26 +44,63 @@ export default function Flights() {
     return (
         <div>
             <h2>查詢航班</h2>
-
-            <input value={from} onChange={e => setFrom(e.target.value)} />
-            <input value={to} onChange={e => setTo(e.target.value)} />
-            <input value={depart} onChange={e => setDepart(e.target.value)} />
-            <input value={ret} onChange={e => setRet(e.target.value)} />
-
-            <button onClick={handleSearch} disabled={loading}>
-                {loading ? "查詢中..." : "查詢"}
-            </button>
-
-            <ul>
-                {result.map((f, i) => (
-                    <li key={i}>
-                        {f.flight_number} - {f.price}
-                        <button onClick={() => handleAdd(f)}>
-                            加入追蹤
-                        </button>
-                    </li>
-                ))}
-            </ul>
+            <table className="app-table">
+                <thead>
+                    <tr>
+                        <th>出發地</th>
+                        <th>目的地</th>
+                        <th>出發時間</th>
+                        <th>抵達時間</th>
+                        <th>    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input value={from} onChange={e => setFrom(e.target.value)} /></td>
+                        <td><input value={to} onChange={e => setTo(e.target.value)} /></td>
+                        <td><input value={depart} onChange={e => setDepart(e.target.value)} /></td>
+                        <td><input value={ret} onChange={e => setRet(e.target.value)} /></td>
+                        <td>
+                            <div className="app-table-actions">
+                                <button
+                                    className="app-btn app-btn"
+                                    onClick={handleSearch} disabled={loading}
+                                >
+                                    {loading ? "查詢中..." : "查詢"}
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br></br>
+            <table className="app-table">
+                <thead>
+                    <tr>
+                        <th>班機</th>
+                        <th>價格</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {result.map((f, i) => (
+                        <tr key={i}>
+                            <td>{f.flight_number}</td>
+                            <td>{f.price}</td>
+                            <td>
+                                <div className="app-table-actions">
+                                    <button
+                                        className="app-btn app-btn-primary"
+                                        onClick={() => handleAdd(f)}
+                                    >
+                                        加入追蹤
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }

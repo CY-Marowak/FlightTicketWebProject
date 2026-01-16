@@ -1,5 +1,9 @@
 import { Link, Outlet } from "react-router-dom"
 
+/*
+    整體頁面
+*/
+
 export default function Dashboard() {
     return (
         <div style={{ padding: 24 }}>
