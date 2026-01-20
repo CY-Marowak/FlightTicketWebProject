@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import "../styles/table.css"
 import type { TrackedFlight } from "../types/flight"
 import { fetchTrackedFlights } from "../api/flights"
 import { deleteTrackedFlight } from "../api/flights"
+import "../styles/table.css"
 
 /*
     我的航班頁面
@@ -10,13 +10,15 @@ import { deleteTrackedFlight } from "../api/flights"
 
 export default function TrackedFlights() {
     const [flights, setFlights] = useState<TrackedFlight[]>([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         async function load() {
             try {
                 setLoading(true)
+                setError(null)
+
                 const data = await fetchTrackedFlights()
                 setFlights(data)
             } catch (err) {
@@ -51,7 +53,7 @@ export default function TrackedFlights() {
         try {
             await deleteTrackedFlight(id)
 
-            // ⭐ 關鍵：前端同步移除（不用重抓 API）
+            // 前端同步移除（不用重抓 API）
             setFlights(prev => prev.filter(f => f.id !== id))
         } catch (err) {
             alert("刪除失敗")
