@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard"
 import Flights from "../pages/Flights"
 import TrackedFlights from "../pages/TrackedFlights"
 import Notifications from "../pages/Notifications"
+import Profile from "../pages/Profile"
 
 interface PrivateRouteProps {
     children: ReactNode
@@ -41,6 +42,7 @@ export default function AppRoutes() {
                 <Route path="flights" element={<Flights />} />
                 <Route path="tracked" element={<TrackedFlights />} />
                 <Route path="notifications" element={<Notifications />} />
+                <Route path="profile" element={<Profile />} />
             </Route>
         </Routes>
     )
