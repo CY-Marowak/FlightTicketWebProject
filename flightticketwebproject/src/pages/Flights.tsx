@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { searchFlights} from "../api/flights"
+import axios from 'axios'
 import type { Flight } from "../types/flight"
+import { searchFlights} from "../api/flights"
 import { addTrackedFlight } from "../api/flights"
 import type { FlightResult } from "../types/flight"
 
@@ -11,8 +12,8 @@ import type { FlightResult } from "../types/flight"
 export default function Flights() {
     const [from, setFrom] = useState("TPE")
     const [to, setTo] = useState("OKA")
-    const [depart, setDepart] = useState("2026-03-12")
-    const [ret, setRet] = useState("2026-03-15")
+    const [depart, setDepart] = useState("2026-03-28")
+    const [ret, setRet] = useState("2026-03-31")
     const [result, setResult] = useState<Flight[]>([])
     const [loading, setLoading] = useState(false)
 
@@ -35,8 +36,18 @@ export default function Flights() {
         try {
             await addTrackedFlight(flight)
             alert("已加入追蹤")
-        } catch (err) {
-            alert("加入追蹤失敗")
+        }
+        catch (e) {
+            let errorMsg = "網路或伺服器錯誤";
+
+            // 檢查 e 是否為 Axios 錯誤
+            if (axios.isAxiosError(e)) {
+                errorMsg = e.response?.data?.error || errorMsg;
+            } else if (e instanceof Error) {
+                errorMsg = e.message;
+            }
+
+            alert(`加入追蹤失敗：${errorMsg}`);
         }
     }
 
