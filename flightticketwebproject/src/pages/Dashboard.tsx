@@ -31,7 +31,7 @@ export default function Dashboard() {
             <nav style={styles.navBar}>
                 <Link to="flights">查詢航班</Link>
                 <Link to="tracked">我的航班</Link>
-                <Link to="notifications">通知</Link>
+                <Link to="notifications">通知紀錄</Link>
                 <Link to="profile">個人資料</Link>
             </nav>
 
