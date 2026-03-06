@@ -73,7 +73,7 @@ export default function TrackedFlights() {
                         <th>航空公司</th>
                         <th>航班</th>
                         <th>出發時間</th>
-                        <th>回程時間</th>
+                        <th>抵達時間</th>
                         <th>價格</th>
                         <th>操作</th>
                     </tr>
