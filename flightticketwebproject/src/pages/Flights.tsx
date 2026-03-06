@@ -61,7 +61,7 @@ export default function Flights() {
                         <th>出發地</th>
                         <th>目的地</th>
                         <th>出發時間</th>
-                        <th>抵達時間</th>
+                        <th>回程時間</th>
                         <th>    </th>
                     </tr>
                 </thead>
