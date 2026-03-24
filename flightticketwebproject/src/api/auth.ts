@@ -1,5 +1,5 @@
 import api from "./client"
-import type { LoginResponse} from "../types/auth"
+import type { LoginResponse, LoginRequest } from "../types/auth"
 
 export async function register(username: string, password: string) {
     const res = await api.post<LoginResponse>("/register", {
@@ -9,11 +9,9 @@ export async function register(username: string, password: string) {
     return res.data
 }
 
-export async function login(username: string, password: string) {
-    const res = await api.post("/login", {
-        username,
-        password
-    })
+
+export async function login(data: LoginRequest): Promise<LoginResponse> {
+    const res = await api.post("/login", data)
     return res.data
 }
 

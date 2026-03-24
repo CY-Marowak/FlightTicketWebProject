@@ -1,6 +1,7 @@
 export interface LoginRequest {
     username: string
     password: string
+    push_token?: string | null;
 }
 
 export interface LoginResponse {

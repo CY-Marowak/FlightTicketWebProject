@@ -71,7 +71,7 @@ export default function Notifications() {
                             <td>{n.flight_id}</td>
                             <td>NT$ {n.price.toLocaleString()}</td>
                             <td>{n.message}</td>
-                            <td>{n.time}</td>
+                            <td>{new Date(n.time).toLocaleString("zh-TW")}</td> 
                         </tr>
                     ))}
                 </tbody>
