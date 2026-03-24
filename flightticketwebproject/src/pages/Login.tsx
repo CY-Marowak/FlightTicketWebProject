@@ -25,7 +25,7 @@ export default function Login() {
         setLoading(true)
 
         try {
-            const data = await login(username, password)
+            const data = await login({username, password})
 
             // 儲存 JWT
             setToken(data.token)
