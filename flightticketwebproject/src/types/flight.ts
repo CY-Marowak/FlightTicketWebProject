@@ -1,6 +1,7 @@
 export interface FlightPrice {
     time: string
     price: number
+    displayTime?: string; // 格式化後的時間
 }
 
 //以下三個類似的type 之後統整

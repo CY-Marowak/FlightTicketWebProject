@@ -1,71 +1,79 @@
 import { useEffect, useState } from "react"
-import type { TrackedFlight } from "../types/flight"
-import { fetchTrackedFlights } from "../api/flights"
-import { deleteTrackedFlight } from "../api/flights"
+import { fetchTrackedFlights, deleteTrackedFlight, fetchPriceHistory } from "../api/flights"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { TrackedFlight, FlightPrice } from "../types/flight"; // 確保你有這個類型
 import "../styles/table.css"
-
-/*
-    我的航班頁面
-*/
 
 export default function TrackedFlights() {
     const [flights, setFlights] = useState<TrackedFlight[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
-    useEffect(() => {
-        async function load() {
-            try {
-                setLoading(true)
-                setError(null)
+    // 圖表相關狀態
+    const [historyData, setHistoryData] = useState<FlightPrice[] | null>(null)
+    const [selectedFlight, setSelectedFlight] = useState<string>("")
+    const [isChartLoading, setIsChartLoading] = useState(false)
 
-                const data = await fetchTrackedFlights()
-                setFlights(data)
-            } catch (err) {
-                if (err instanceof Error) {
-                    setError(err.message)
-                } else {
-                    setError("載入失敗")
-                }
-            } finally {
-                setLoading(false)
-            }
-        }
-        load()
+    useEffect(() => {
+        loadFlights();
     }, [])
 
-    if (loading) {
-        return <p>載入中...</p>
+    async function loadFlights() {
+        try {
+            setLoading(true)
+            setError(null)
+            const data = await fetchTrackedFlights()
+            setFlights(data)
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "載入失敗")
+        } finally {
+            setLoading(false)
+        }
     }
 
-    if (error) {
-        return <p style={{ color: "red" }}>{error}</p>
-    }
+    async function handleShowHistory(id: number, flightNo: string) {
+        try {
+            setIsChartLoading(true)
+            const data: FlightPrice[] = await fetchPriceHistory(id);
 
-    if (flights.length === 0) {
-        return <p>目前沒有追蹤中的航班</p>
+            const formatted = data.map((d) => ({
+                ...d,
+                displayTime: new Date(d.time).toLocaleString("zh-TW", {
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                })
+            }));
+
+            setHistoryData(formatted);
+            setSelectedFlight(flightNo);
+        } catch (err) {
+            alert("目前沒有歷史紀錄");
+            console.error(err);
+        } finally {
+            setIsChartLoading(false);
+        }
     }
 
     async function handleDelete(id: number) {
-        const ok = window.confirm("確定要刪除此航班嗎？")
-        if (!ok) return
-
+        if (!window.confirm("確定要刪除嗎？")) return;
         try {
-            await deleteTrackedFlight(id)
-
-            // 前端同步移除（不用重抓 API）
-            setFlights(prev => prev.filter(f => f.id !== id))
+            await deleteTrackedFlight(id);
+            setFlights(prev => prev.filter(f => f.id !== id));
         } catch (err) {
-            alert("刪除失敗")
+            alert("刪除失敗");
         }
     }
 
-    return (
-        <div>
-            <h2>我的航班</h2>
+    // 處理 Loading 畫面
+    if (loading) return <div className="container"><p>載入航班中...</p></div>;
+    // 處理 Error 畫面
+    if (error) return <div className="container"><p style={{ color: "red" }}>{error}</p></div>;
 
-            {loading && <p>載入中...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+    return (
+        <div className="container">
+            <h2>我的航班</h2>
 
             <table className="app-table">
                 <thead>
@@ -73,7 +81,6 @@ export default function TrackedFlights() {
                         <th>航空公司</th>
                         <th>航班</th>
                         <th>出發時間</th>
-                        <th>抵達時間</th>
                         <th>價格</th>
                         <th>操作</th>
                     </tr>
@@ -84,14 +91,17 @@ export default function TrackedFlights() {
                             <td>{f.airline}</td>
                             <td>{f.flight_number}</td>
                             <td>{f.depart_time}</td>
-                            <td>{f.arrival_time}</td>
-                            <td>{f.price}</td>
+                            <td>NT$ {f.price.toLocaleString()}</td>
                             <td>
                                 <div className="app-table-actions">
                                     <button
-                                        className="app-btn app-btn-danger"
-                                        onClick={() => handleDelete(f.id)}
+                                        className="app-btn"
+                                        onClick={() => handleShowHistory(f.id, f.flight_number)}
+                                        disabled={isChartLoading}
                                     >
+                                        {isChartLoading && selectedFlight === f.flight_number ? "載入中..." : "趨勢"}
+                                    </button>
+                                    <button className="app-btn app-btn-danger" onClick={() => handleDelete(f.id)}>
                                         刪除
                                     </button>
                                 </div>
@@ -100,8 +110,42 @@ export default function TrackedFlights() {
                     ))}
                 </tbody>
             </table>
+
+            {/* 票價歷史 Modal */}
+            {historyData && (
+                <div className="modal-overlay" onClick={() => setHistoryData(null)}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <h3>{selectedFlight} 票價趨勢</h3>
+                        <div style={{ width: '100%', height: 300, marginTop: '20px' }}>
+                            <ResponsiveContainer>
+                                <LineChart data={historyData}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis
+                                        dataKey="displayTime"
+                                        tick={{ fontSize: 12 }}
+                                        interval="preserveStartEnd"
+                                    />
+                                    <YAxis tick={{ fontSize: 12 }} />
+                                    <Tooltip
+                                        contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
+                                    />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="price"
+                                        stroke="#1a73e8"
+                                        strokeWidth={3}
+                                        dot={{ r: 4 }}
+                                        activeDot={{ r: 6 }}
+                                    />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div style={{ textAlign: 'right', marginTop: '20px' }}>
+                            <button className="app-btn" onClick={() => setHistoryData(null)}>關閉</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
-
-
