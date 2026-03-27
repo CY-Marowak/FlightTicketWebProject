@@ -37,7 +37,6 @@ export async function fetchTrackedFlights(): Promise<TrackedFlight[]> {
             }
         }
     )
-
     return res.data
 }
 
@@ -57,4 +56,10 @@ export async function addTrackedFlight(flight: FlightResult) {
 export async function deleteTrackedFlight(id: number) {
     const res = await api.delete(`/flights/${id}`)
     return res.data
+}
+
+// 查看票價歷史
+export async function fetchPriceHistory(flightId: number) {
+    const res = await api.get(`/prices/${flightId}`);
+    return res.data; // 回傳 [{time: "...", price: 100}, ...]
 }
