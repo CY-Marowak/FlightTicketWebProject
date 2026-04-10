@@ -4,6 +4,7 @@ import type { Flight } from "../types/flight"
 import { searchFlights} from "../api/flights"
 import { addTrackedFlight } from "../api/flights"
 import type { FlightResult } from "../types/flight"
+import "../styles/table.css"
 
 /*
     查詢航班頁面
@@ -12,8 +13,10 @@ import type { FlightResult } from "../types/flight"
 export default function Flights() {
     const [from, setFrom] = useState("TPE")
     const [to, setTo] = useState("OKA")
-    const [depart, setDepart] = useState("2026-03-28")
-    const [ret, setRet] = useState("2026-03-31")
+
+    const today = new Date().toISOString().split('T')[0];
+    const [depart, setDepart] = useState(today)
+    const [ret, setRet] = useState("") // 回程預設空白代表未選
     const [result, setResult] = useState<Flight[]>([])
     const [loading, setLoading] = useState(false)
 
@@ -67,15 +70,44 @@ export default function Flights() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input value={from} onChange={e => setFrom(e.target.value)} /></td>
-                        <td><input value={to} onChange={e => setTo(e.target.value)} /></td>
-                        <td><input value={depart} onChange={e => setDepart(e.target.value)} /></td>
-                        <td><input value={ret} onChange={e => setRet(e.target.value)} /></td>
+                        <td>
+                            <input
+                                className="app-input"
+                                value={from}
+                                onChange={e => setFrom(e.target.value.toUpperCase())}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                className="app-input"
+                                value={to}
+                                onChange={e => setTo(e.target.value.toUpperCase())}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="date"           // 改為日期型態
+                                className="app-input-date"
+                                min={today}          // 禁止選過去
+                                value={depart}
+                                onChange={e => setDepart(e.target.value)}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="date"           // 改為日期型態
+                                className="app-input-date"
+                                min={depart}         // 回程必須晚於或等於出發日期
+                                value={ret}
+                                onChange={e => setRet(e.target.value)}
+                            />
+                        </td>
                         <td>
                             <div className="app-table-actions">
                                 <button
-                                    className="app-btn app-btn"
-                                    onClick={handleSearch} disabled={loading}
+                                    className="app-btn"
+                                    onClick={handleSearch}
+                                    disabled={loading}
                                 >
                                     {loading ? "查詢中..." : "查詢"}
                                 </button>
@@ -115,3 +147,5 @@ export default function Flights() {
         </div>
     )
 }
+
+

@@ -24,6 +24,30 @@
         background-color: rgba(255, 255, 255, 0.05);
     }
 
+    /* 針對表格內的 input 進行美化 */
+    .app-table input {
+        padding: 6px 10px;
+        border: 1px solid #666; /* 配合你表格的深色調 */
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        font-size: 14px;
+        width: 140px; /* 固定寬度防止日期切換時跳動 */
+    }
+
+        /* 專門針對日期選擇器的微調 */
+        .app-table input[type="date"] {
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        /* 移除日期選擇器內部的預設邊距 (某些瀏覽器適用) */
+        .app-table input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: invert(0.5); /* 如果你的背景很深，可以調整這個顏色 */
+        }
+
+
 /* 操作按鈕容器 */
 .app-table-actions {
     display: flex;
