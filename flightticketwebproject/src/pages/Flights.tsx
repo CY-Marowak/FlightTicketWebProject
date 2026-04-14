@@ -6,6 +6,16 @@ import { addTrackedFlight } from "../api/flights"
 import type { FlightResult } from "../types/flight"
 import "../styles/table.css"
 
+const COMMON_AIRPORTS = [
+    { code: "TPE", name: "桃園" },
+    { code: "NRT", name: "成田" },
+    { code: "HND", name: "羽田" },
+    { code: "OKA", name: "沖繩" },
+    { code: "PUS", name: "釜山" },
+    { code: "HKG", name: "香港" },
+    { code: "LAX", name: "洛杉磯" },
+];
+
 /*
     查詢航班頁面
 */
@@ -56,62 +66,90 @@ export default function Flights() {
 
 
     return (
-        <div>
-            <h2>查詢航班</h2>
+        <div style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2>查詢航班</h2>
+                {/* 加入機場代碼查詢連結 */}
+                <a
+                    href="https://www.como.com.tw/html_information/airportcode.htm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#007bff', fontSize: '14px', textDecoration: 'none' }}
+                >
+                    ✈️ 機場名稱對照表
+                </a>
+            </div>
+
             <table className="app-table">
                 <thead>
                     <tr>
                         <th>出發地</th>
                         <th>目的地</th>
-                        <th>出發時間</th>
-                        <th>回程時間(選填)</th>
-                        <th>    </th>
+                        <th>出發日期</th>
+                        <th>回程日期(選填)</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td style={{ verticalAlign: 'top' }}>
                             <input
                                 className="app-input"
                                 value={from}
                                 onChange={e => setFrom(e.target.value.toUpperCase())}
+                                placeholder="例如: TPE"
                             />
+                            {/* 出發地常用標籤 */}
+                            <div className="web-quick-select">
+                                {COMMON_AIRPORTS.map(a => (
+                                    <span key={a.code} onClick={() => setFrom(a.code)} className="web-badge">
+                                        {a.code}
+                                    </span>
+                                ))}
+                            </div>
                         </td>
-                        <td>
+                        <td style={{ verticalAlign: 'top' }}>
                             <input
                                 className="app-input"
                                 value={to}
                                 onChange={e => setTo(e.target.value.toUpperCase())}
+                                placeholder="例如: OKA"
                             />
+                            {/* 目的地常用標籤 */}
+                            <div className="web-quick-select">
+                                {COMMON_AIRPORTS.map(a => (
+                                    <span key={a.code} onClick={() => setTo(a.code)} className="web-badge">
+                                        {a.code}
+                                    </span>
+                                ))}
+                            </div>
                         </td>
-                        <td>
+                        <td style={{ verticalAlign: 'top' }}>
                             <input
-                                type="date"           // 改為日期型態
+                                type="date"
                                 className="app-input-date"
-                                min={today}          // 禁止選過去
+                                min={today}
                                 value={depart}
                                 onChange={e => setDepart(e.target.value)}
                             />
                         </td>
-                        <td>
+                        <td style={{ verticalAlign: 'top' }}>
                             <input
-                                type="date"           // 改為日期型態
+                                type="date"
                                 className="app-input-date"
-                                min={depart}         // 回程必須晚於或等於出發日期
+                                min={depart}
                                 value={ret}
                                 onChange={e => setRet(e.target.value)}
                             />
                         </td>
-                        <td>
-                            <div className="app-table-actions">
-                                <button
-                                    className="app-btn"
-                                    onClick={handleSearch}
-                                    disabled={loading}
-                                >
-                                    {loading ? "查詢中..." : "查詢"}
-                                </button>
-                            </div>
+                        <td style={{ verticalAlign: 'top' }}>
+                            <button
+                                className="app-btn"
+                                onClick={handleSearch}
+                                disabled={loading}
+                            >
+                                {loading ? "查詢中..." : "查詢"}
+                            </button>
                         </td>
                     </tr>
                 </tbody>
