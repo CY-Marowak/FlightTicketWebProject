@@ -8,9 +8,9 @@
 
     .app-table th,
     .app-table td {
-        padding: 10px 12px;
+        padding: 12px 8px;
         border-bottom: 1px solid #444;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
     }
 
@@ -82,6 +82,33 @@
 
     .app-btn-primary:hover {
         background-color: #025aa5;
+    }
+
+/* 常用標籤容器：讓標籤可以自動換行，不撐開表格高度 */
+.web-quick-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+    max-width: 150px; /* 限制寬度使其在儲存格內整齊 */
+}
+
+/* 標籤外觀：小巧且點擊感明顯 */
+.web-badge {
+    font-size: 11px;
+    background-color: #f0f2f5;
+    color: #555;
+    padding: 2px 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: all 0.2s;
+}
+
+    .web-badge:hover {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
     }
 
 /* 圖表 */
