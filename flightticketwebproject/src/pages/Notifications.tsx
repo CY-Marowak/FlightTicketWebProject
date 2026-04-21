@@ -58,18 +58,16 @@ export default function Notifications() {
             <table className="app-table">
                 <thead>
                     <tr>
-                        <th>價格</th>
-                        <th>通知內容</th>
                         <th>時間</th>
+                        <th>通知內容</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     {notifications.map(n => (
                         <tr key={n.id}>
-                            <td>NT$ {n.price.toLocaleString()}</td>
+                            <td>{new Date(n.time).toLocaleString("zh-TW")}</td>
                             <td>{n.message}</td>
-                            <td>{new Date(n.time).toLocaleString("zh-TW")}</td> 
                         </tr>
                     ))}
                 </tbody>
