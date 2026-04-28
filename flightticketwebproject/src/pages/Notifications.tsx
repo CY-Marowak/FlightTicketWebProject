@@ -58,7 +58,7 @@ export default function Notifications() {
             <table className="app-table">
                 <thead>
                     <tr>
-                        <th>時間</th>
+                        <th>通知時間</th>
                         <th>通知內容</th>
                     </tr>
                 </thead>
