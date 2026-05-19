@@ -160,7 +160,6 @@ export default function Flights() {
                     <tr>
                         <th>班機</th>
                         <th>價格</th>
-                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
