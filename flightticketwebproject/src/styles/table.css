@@ -51,7 +51,8 @@
 /* 操作按鈕容器 */
 .app-table-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     gap: 8px;
 }
 
