@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Flight Ticket Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An application that tracks the flight prices from time to time and notifies users when prices drop. <br>
+There are three version (Desktop, Web and Mobile) for users.
+This is the **Web version**.<br>
+Project main page: https://github.com/CY-Marowak/FlightTicketProject
 
-Currently, two official plugins are available:
+	
+## Tech Stack
+1. 運行 React + Vite
+2. 語言 TypeScript
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to use
+Go to webiste:<br>
+https://flightticketwebproject.onrender.com/
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Web project structure
+:::spoiler
+src/<br>
+│<br>
+├─ api/                 # 所有 API 呼叫<br>
+│   ├─ client.ts        # Axios Client（自動帶 JWT）<br>
+│   ├─ auth.ts<br>
+│   ├─ flights.ts<br>
+│   ├─ notifications.ts<br>
+│   ├─ profiles.ts<br>
+│<br>
+├─ auth/<br>
+│   ├─ AuthContext.tsx             # 全站登入狀態<br>
+│   ├─ AuthProvider.tsx<br>
+│<br>
+├─ hooks/<br>
+│   ├─ useAuth.ts<br>
+│<br>
+├─ pages/<br>
+│   ├─ Login.tsx<br>
+│   ├─ Register.tsx<br>
+│   ├─ Dashboard.tsx<br>
+│   ├─ Flights.tsx<br>
+│   ├─ TrackedFlights.tsx<br>
+│   ├─ Notifications.tsx<br>
+│   ├─ Profile.tsx<br>
+│<br>
+├─ components/<br>
+│   ├─ FlightTable.tsx<br>
+│   ├─ NotificationTable.tsx<br>
+│   ├─ PriceChart.tsx<br>
+│<br>
+├─ routes/<br>
+│   └─ AppRoutes.tsx<br>
+│<br>
+├─ styles/<br>
+│   └─ table.css<br>
+│<br>
+├─ types/<br>
+│   └─ auth.ts<br>
+│   └─ common.ts<br>
+│   └─ flights.ts<br>
+│   └─ notifications.ts<br>
+│   └─ profile.ts<br>
+│<br>
+├─ utils/<br>
+│   └─ token.ts #Token 管理<br>
+│<br>
+├─ App.tsx<br>
+└─ main.tsx<br>
+:::
