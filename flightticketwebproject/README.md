@@ -16,52 +16,54 @@ https://flightticketwebproject.onrender.com/
 
 ## Web project structure
 :::spoiler
-src/<br>
-│<br>
-├─ api/                 # 所有 API 呼叫<br>
-│   ├─ client.ts        # Axios Client（自動帶 JWT）<br>
-│   ├─ auth.ts<br>
-│   ├─ flights.ts<br>
-│   ├─ notifications.ts<br>
-│   ├─ profiles.ts<br>
-│<br>
-├─ auth/<br>
-│   ├─ AuthContext.tsx             # 全站登入狀態<br>
-│   ├─ AuthProvider.tsx<br>
-│<br>
-├─ hooks/<br>
-│   ├─ useAuth.ts<br>
-│<br>
-├─ pages/<br>
-│   ├─ Login.tsx<br>
-│   ├─ Register.tsx<br>
-│   ├─ Dashboard.tsx<br>
-│   ├─ Flights.tsx<br>
-│   ├─ TrackedFlights.tsx<br>
-│   ├─ Notifications.tsx<br>
-│   ├─ Profile.tsx<br>
-│<br>
-├─ components/<br>
-│   ├─ FlightTable.tsx<br>
-│   ├─ NotificationTable.tsx<br>
-│   ├─ PriceChart.tsx<br>
-│<br>
-├─ routes/<br>
-│   └─ AppRoutes.tsx<br>
-│<br>
-├─ styles/<br>
-│   └─ table.css<br>
-│<br>
-├─ types/<br>
-│   └─ auth.ts<br>
-│   └─ common.ts<br>
-│   └─ flights.ts<br>
-│   └─ notifications.ts<br>
-│   └─ profile.ts<br>
-│<br>
-├─ utils/<br>
-│   └─ token.ts #Token 管理<br>
-│<br>
-├─ App.tsx<br>
-└─ main.tsx<br>
+```text
+src/
+│
+├─ api/                 # 所有 API 呼叫
+│   ├─ client.ts        # Axios Client（自動帶 JWT）
+│   ├─ auth.ts
+│   ├─ flights.ts
+│   ├─ notifications.ts
+│   └─ profiles.ts
+│
+├─ auth/
+│   ├─ AuthContext.tsx             # 全站登入狀態
+│   └─ AuthProvider.tsx
+│
+├─ hooks/
+│   └─ useAuth.ts
+│
+├─ pages/
+│   ├─ Login.tsx
+│   ├─ Register.tsx
+│   ├─ Dashboard.tsx
+│   ├─ Flights.tsx
+│   ├─ TrackedFlights.tsx
+│   ├─ Notifications.tsx
+│   └─ Profile.tsx
+│
+├─ components/<
+│   ├─ FlightTable.tsx
+│   ├─ NotificationTable.tsx
+│   └─ PriceChart.tsx
+│
+├─ routes/
+│   └─ AppRoutes.tsx
+│
+├─ styles/
+│   └─ table.css
+│
+├─ types/
+│   ├─ auth.ts
+│   ├─ common.ts
+│   ├─ flights.ts
+│   ├─ notifications.ts
+│   └─ profile.ts
+│
+├─ utils/
+│   └─ token.ts #Token 管理
+│
+├─ App.tsx
+└─ main.tsx
+```
 :::
