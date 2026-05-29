@@ -1,7 +1,7 @@
 # Flight Ticket Tracker
 
 An application that tracks the flight prices from time to time and notifies users when prices drop. <br>
-There are three version (Desktop, Web and Mobile) for users.
+There are three version (Desktop, Web and Mobile) for users.<br>
 This is the **Web version**.<br>
 Project main page: https://github.com/CY-Marowak/FlightTicketProject
 
@@ -15,7 +15,6 @@ Go to webiste:<br>
 https://flightticketwebproject.onrender.com/
 
 ## Web project structure
-:::spoiler
 ```text
 src/
 │
@@ -66,4 +65,3 @@ src/
 ├─ App.tsx
 └─ main.tsx
 ```
-:::
