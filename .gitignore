@@ -4,6 +4,8 @@
 *.user                      # 本地專案的使用者偏好設定
 *.sln.docstates             # 視窗開啟狀態紀錄
 .localhistory/              # 本地歷史紀錄資料夾
+flightticketproject/node_modules/
+flightticketproject/.env
 
 # ==========================================
 # 2. 建置與編譯產物 (Build Results)
