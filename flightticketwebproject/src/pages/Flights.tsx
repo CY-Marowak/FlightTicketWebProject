@@ -159,6 +159,7 @@ export default function Flights() {
                 <thead>
                     <tr>
                         <th>班機</th>
+                        <th>時間</th>
                         <th>價格</th>
                         <th>操作</th>
                     </tr>
@@ -167,6 +168,7 @@ export default function Flights() {
                     {result.map((f, i) => (
                         <tr key={i}>
                             <td>{f.flight_number}</td>
+                            <td>{f.depart_time} - {f.arrival_time}</td>
                             <td>{f.price}</td>
                             <td>
                                 <div className="app-table-actions">
