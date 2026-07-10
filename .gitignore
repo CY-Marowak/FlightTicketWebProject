@@ -5,7 +5,7 @@
 *.sln.docstates             # 視窗開啟狀態紀錄
 .localhistory/              # 本地歷史紀錄資料夾
 flightticketwebproject/.vscode/
-
+.vs/
 
 # ==========================================
 # 2. 建置與編譯產物 (Build Results)
