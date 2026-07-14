@@ -70,29 +70,29 @@ src/
 ## Result
 <figure>
   <figcaption>登入</figcaption>
-  <img src="./result/登入.png" width="50%" alt="登入">
+  <img src="./result/登入.png" width="70%" alt="登入">
 </figure>
 <figure>
   <figcaption>首頁</figcaption>
-  <img src="./result/首頁.png" width="50%" alt="首頁">
+  <img src="./result/首頁.png" width="70%" alt="首頁">
 </figure>
 <figure>
   <figcaption>查詢航班</figcaption>
-  <img src="./result/查詢航班2.png" width="50%" alt="查詢航班">
+  <img src="./result/查詢航班2.png" width="70%" alt="查詢航班">
 </figure>
 <figure>
   <figcaption>我的航班</figcaption>
-  <img src="./result/我的航班.png" width="50%" alt="我的航班">
+  <img src="./result/我的航班.png" width="70%" alt="我的航班">
 </figure>
 <figure>
   <figcaption>價格趨勢</figcaption>
-  <img src="./result/價格折線圖.png" width="50%" alt="價格折線圖">
+  <img src="./result/價格折線圖.png" width="70%" alt="價格折線圖">
 </figure>
 <figure>
   <figcaption>通知紀錄</figcaption>
-  <img src="./result/通知紀錄.png" width="50%" alt="通知紀錄">
+  <img src="./result/通知紀錄.png" width="70%" alt="通知紀錄">
 </figure>
 <figure>
   <figcaption>個人資料</figcaption>
-  <img src="./result/個人資料.png" width="50%" alt="個人資料">
+  <img src="./result/個人資料.png" width="70%" alt="個人資料">
 </figure>
